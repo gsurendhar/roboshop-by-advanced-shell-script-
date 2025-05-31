@@ -11,7 +11,7 @@ G="\e[31"
 Y="\e[31"
 N="\e[31"
 
-echo "Script execution started at $START_TIME " | tee -a $LOG_FILE
+echo "Script execution started at $(date) " | tee -a $LOG_FILE
 
 mkdir -p $LOG_FOLDER
 
