@@ -6,13 +6,13 @@ SCRIPT_DIR=$PWD
 LOG_FOLDER="/var/log/roboshop-shell-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
-R="\e[31"
-G="\e[31"
-Y="\e[31"
-N="\e[31"
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
 
 mkdir -p $LOG_FOLDER
-echo "Script execution started at $START_TIME " | tee -a $LOG_FILE
+echo "Script execution started at $(date) " | tee -a $LOG_FILE
 
 # ROOT PRIVILEGES CHECKING
 CHECK_ROOT(){
@@ -53,7 +53,7 @@ NODEJS_SETUP(){
 
 PYTHON_SETUP(){
 
-    dnf install python3 gcc python3-devel -y
+    dnf install python3 gcc python3-devel -y &>>$LOG_FILE
 
     pip3 install -r requirements.txt &>>$LOG_FILE
     VALIDATE $? "Installing Dependencies"
@@ -62,7 +62,7 @@ PYTHON_SETUP(){
 
 MAVEN_SETUP(){
     
-    dnf install maven -y 
+    dnf install maven -y &>>$LOG_FILE
     VALIDATE $? "Installing MAVEN and JAVA"
 
     mvn clean package &>>$LOG_FILE
@@ -114,5 +114,5 @@ SYSTEMD_SETUP(){
 PRINT_TIME(){
     END_TIME=$(date +%S)
     TOTAL_TIME=$(($END_TIME-$START_TIME))
-    echo -e "Script Execution Completed Successfully, $Y time taken : $TOTAL_TIME Seconds $N "
+    echo -e "Script Execution Completed Successfully, $Y time taken : $TOTAL_TIME Seconds $N " | tee -a $LOG_FILE
  }
