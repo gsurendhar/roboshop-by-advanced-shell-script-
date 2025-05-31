@@ -6,11 +6,12 @@ CHECK_ROOT
 
 APP_SETUP
 
-NODEJS_SETUP"
+NODEJS_SETUP
 
 SYSTEMD_SETUP
 
 cp $SCRIPT_DIR/mongodb.repo /etc/yum.repos.d/mongodb.repo 
+
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "Installing Mongodb Client"
 
