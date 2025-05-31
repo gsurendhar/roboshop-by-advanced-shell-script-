@@ -22,7 +22,7 @@ CHECK_ROOT(){
         exit 1
     else 
         echo -e " You are already running with $Y ROOT $N access " | tee -a $LOG_FILE
-    file
+    fi
 }
 
 
